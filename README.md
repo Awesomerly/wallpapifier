@@ -6,7 +6,7 @@ pdm install
 pdm run
 ```
 
-Install the program:
+Easy install of the program:
 ```
-pipx install ./
-````
+pipx install git+https://github.com/Awesomerly/wallpapify/
+```
