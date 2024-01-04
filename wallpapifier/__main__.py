@@ -15,7 +15,7 @@ def dir_or_file(p):
         
 
 def convert_image(path, width, height, out_path):
-    print(f"Hello {path} {out_path} in {width} by {height}!")
+    print(f"Converting {path.name}")
     try:
         im = Image.open(path)
     except:
@@ -33,12 +33,7 @@ def convert_image(path, width, height, out_path):
         for j in range(0, tiles_vert):
             dest.paste(im, (i*img_width, j*img_height))
 
-    # dst_cropped = .crop(())
-
     dest.save(out_path)
-
-    
-
 
 @click.command()
 @click.option("--input", "-i", type=dir_or_file, required=True)
@@ -46,9 +41,14 @@ def convert_image(path, width, height, out_path):
 @click.option("--height", "-h", type=click.INT, required=True)
 def main(input, width, height):
     if isinstance(input, list):
-        print("Lol this isn't supported lol")
-        exit(0)
-    out_fname = input.stem + "_converted.png"
-    out_path = input.parent / out_fname
-    convert_image(input, width, height, out_path)
+        for file in input:
+            out_dir_name = file.parent.name + "_converted"
+            out_dir = file.parents[1] / out_dir_name
+            out_path = out_dir  / file.name
+            Path(out_dir).mkdir(parents=True, exist_ok=True)
+            convert_image(file, width, height, out_path)
+    else:
+        out_fname = input.stem + "_converted.png"
+        out_path = input.parent / out_fname
+        convert_image(input, width, height, out_path)
     print("All done ^-^")
