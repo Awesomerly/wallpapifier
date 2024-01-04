@@ -44,7 +44,8 @@ def main(input, width, height):
         for file in input:
             out_dir_name = file.parent.name + "_converted"
             out_dir = file.parents[1] / out_dir_name
-            out_path = out_dir  / file.name
+            out_file_name = file.stem + ".png"
+            out_path = out_dir  / out_file_name
             Path(out_dir).mkdir(parents=True, exist_ok=True)
             convert_image(file, width, height, out_path)
     else:
