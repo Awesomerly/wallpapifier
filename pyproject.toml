@@ -1,0 +1,21 @@
+[project]
+name = "wallpapifier"
+version = "0.1.0"
+description = "Takes an image and tiles it into a specified resolution. Intended for wallpapers"
+authors = [
+    {name = "Awe", email = ""},
+]
+dependencies = [
+    "pillow>=10.2.0",
+    "click>=8.1.7",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "AGPL"}
+
+[project.scripts]
+wallpapifier = "wallpapifier.__main__:main"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
